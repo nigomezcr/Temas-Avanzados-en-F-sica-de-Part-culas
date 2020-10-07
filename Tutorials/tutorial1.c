@@ -1,6 +1,6 @@
 //First Tutorial: Creating a first histogram
 
-void main()
+void tutorial1()
 {
   //Define de histogram
   TH1F *hist1 = new TH1F("hist1", "First Histogram", 100, 0, 100);

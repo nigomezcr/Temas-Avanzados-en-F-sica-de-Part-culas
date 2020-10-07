@@ -1,0 +1,7 @@
+void tutorial1()
+{
+  TH1F *hist1 = new TH1F("hist1", "First Histogram", 100, 0, 100);
+
+  TCanvas *c1 = new Tcanvas();
+  hist -> Draw();
+}

@@ -7,7 +7,7 @@ void main_Top(int proof)
 {
   // path to your local directory *or* URL, please change the default one!
   /* Local path example */
-  TString path = "/home/atlas-open-data/8tev/";
+  TString path = "http://opendata.atlas.cern/extendedanalysis/datasets.php"; //"/home/atlas-open-data/8tev/";
 
 
   TChain* chain_WW = new TChain("mini");
@@ -21,7 +21,7 @@ void main_Top(int proof)
   TChain* chain_WZ = new TChain("mini");
   chain_WZ->AddFile(path+"MC/mc_105987.WZ.root");
   chain_WZ->Process("TopAnalysis.C+","WZ");
-  
+
   TChain* chain_stop_tchan_top = new TChain("mini");
   chain_stop_tchan_top->AddFile(path+"MC/mc_110090.stop_tchan_top.root");
   chain_stop_tchan_top->Process("TopAnalysis.C+","stop_tchan_top");
@@ -29,7 +29,7 @@ void main_Top(int proof)
   TChain* chain_stop_tchan_antitop = new TChain("mini");
   chain_stop_tchan_antitop->AddFile(path+"MC/mc_110091.stop_tchan_antitop.root");
   chain_stop_tchan_antitop->Process("TopAnalysis.C+","stop_tchan_antitop");
-  
+
   TChain* chain_stop_schan = new TChain("mini");
   chain_stop_schan->AddFile(path+"MC/mc_110119.stop_schan.root");
   chain_stop_schan->Process("TopAnalysis.C+","stop_schan");
@@ -187,7 +187,7 @@ void main_Top(int proof)
   chain_data->AddFile(path+"Data/DataEgamma.root");
   chain_data->AddFile(path+"Data/DataMuons.root");
   chain_data->Process("TopAnalysis.C+","data");
-  
+
 
   if (proof == 1)
   {

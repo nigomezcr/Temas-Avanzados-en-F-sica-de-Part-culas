@@ -21,11 +21,11 @@ void TopAnalysis::define_histograms()
   hist_leadjet_jvf      = new TH1F("hist_jet_jvf",     "Jet Vertex Fraction; JVF ; Jets", 20, 0, 1);
   hist_leadjet_eta      = new TH1F("hist_jet_eta",     "Jet Pseudorapidity; #eta^{jet}; Jets", 30, -3, 3);
   hist_leadjet_MV1      = new TH1F("hist_jet_MV1",     "Jet MV1; MV1 weight ; Jets", 20, 0, 1);
-  hist_three_jets       = new TH1F("hist_three_jets",  "Three jets with higher pT sum; pT; Events", 50, 0, 400); 
-  hist_two_jets         = new TH1F("hist_two_jets",  "Two jets with higher pT; pT; Events", 50, 0, 400); 
-  hist_Zprime_mass      = new TH1F("hist_Zprime_mass",  "Z' reconstructed mass; pT; Events", 50, 0, 400); 
-    
-          
+  hist_three_jets       = new TH1F("hist_three_jets",  "Three jets with higher pT sum; pT; Events", 50, 0, 400);
+  hist_two_jets         = new TH1F("hist_two_jets",  "Two jets with higher pT; pT; Events", 50, 0, 400);
+  hist_Zprime_mass      = new TH1F("hist_Zprime_mass",  "Z' reconstructed mass; pT; Events", 50, 0, 400);
+
+
   // Leading Lepton histograms
   hist_leadleptpt   = new TH1F("hist_leadleptpt",  "Leading Lepton Transverse Momentum;p_{T}^{leadlep} [GeV];Leptons", 20, 0, 200);
   hist_leadlepteta  = new TH1F("hist_leadlepteta", "Leading Lepton Pseudorapidity; #eta^{leadlep}; Leptons", 30, -3, 3);
@@ -160,14 +160,7 @@ void TopAnalysis::FillHistogramsLeadJet( double m, float w , TString s)
 
   if (s.Contains("hist_leadjet_eta")) hist_leadjet_eta->Fill(m,w);
 
-  if (s.Contains("hist_leadjet_MV1")) hist_leadjet_MV1->Fill(m,w);
-    
-  if (s.Contains("hist_three_jets")) hist_three_jets->Fill(m,w);
-    
-  if (s.Contains("hist_two_jets")) hist_two_jets->Fill(m,w);
-    
-  if (s.Contains("hist_Zprime_mass")) hist_Zprime_mass->Fill(m,w);
-    
+  if (s.Contains("hist_leadjet_MV1")) hist_leadjet_MV1->Fill(m,w);    
 
 }
 

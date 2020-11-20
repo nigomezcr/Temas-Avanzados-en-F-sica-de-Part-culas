@@ -21,7 +21,7 @@ TH1F *h_zjets;
 TH1F *h_singletop;
 TH1F *h_ttbar;
 
-std::string histname = "hist_ZPrime_mass";
+std::string histname = "hist_leadjet_jvf";
 float lumi = 1000.;
 //int rebin = 20; //20 - ZmInv //4 - wmt //1 - event selection
 bool logy = true;
@@ -31,8 +31,7 @@ void HistPlotter(){
 
   SetAtlasStyle();
   TH1::SetDefaultSumw2(true);
-  gROOT->Reset();    
-    
+  gROOT->Reset();
 
   groupSamples();
   makeGroupHist();
@@ -45,7 +44,6 @@ void HistPlotter(){
   h_zjets->SetFillColor(kBlue);
   h_singletop->SetFillColor(kOrange);
   h_ttbar->SetFillColor(kCyan);
-    
 
   h_stack->Add(h_db);
   h_stack->Add(h_drellyan);
@@ -119,7 +117,7 @@ void HistPlotter(){
   else if(histname.find("ZmInv") != std::string::npos)h_stack->GetXaxis()->SetRangeUser(0, 3775);
   else if(histname.find("ZmT") != std::string::npos)h_stack->GetXaxis()->SetRangeUser(0, 3575);
   else if(histname.find("lep_pt") != std::string::npos)h_stack->GetXaxis()->SetRangeUser(0, 1575);
-       
+
 
   std::ostringstream Entries_ttbar;
   Entries_ttbar << setprecision(5) << h_ttbar -> Integral(0, h_ttbar -> GetNbinsX()+1);
@@ -176,18 +174,14 @@ void HistPlotter(){
   leg->AddEntry(h_wjets,("W:"+W_jets).c_str(),"f");
   leg->AddEntry(h_drellyan,("Drell-Yan:"+Drell_Yan).c_str(),"f");
   leg->AddEntry(h_db,("Diboson:"+D_Boson).c_str(),"f");
-  leg->AddEntry(h_err,"MC stat. uncertainty:","f");
+  leg->AddEntry(h_err,"MC stat. uncertainty","f");
   // leg->AddEntry(h_signal,("Z'(" + signalmass + " GeV)#rightarrow t#bar{t} x 10^{3}").c_str(),"l");
   leg->Draw();
 
-    
   std::string outfile = histname.substr(0, std::string::npos);
-  if(logy) can->SaveAs((outfile+"_log.pdf").c_str());
-  else can->SaveAs((outfile+".pdf").c_str());
-    
-    
-    
-    
+  //if(logy) can->SaveAs((outfile+"_log.pdf").c_str());
+  //else can->SaveAs((outfile+".pdf").c_str());
+    can->SaveAs((outfile+".pdf").c_str());
 }
 
 void groupSamples(){

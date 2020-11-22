@@ -24,6 +24,9 @@ config = {
     "jet_MV1"            : {"y_margin" : 0.3},
     "vxp_z"              : {},
     "pvxp_n"             : {},
+    #"W_mass"             : {},
+    #"T_mass"             : {},
+    #"Z_mass"             : {},
 },
 
 "Paintables": {

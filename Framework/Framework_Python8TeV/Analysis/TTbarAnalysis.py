@@ -40,6 +40,12 @@ class TTbarAnalysis(Analysis.Analysis):
       self.hist_vxp_z       = self.addStandardHistogram("vxp_z")
       self.hist_pvxp_n      = self.addStandardHistogram("pvxp_n")
   
+      self.hist_W_mass      = self.assStandardHistogram("W_mass")
+      self.hist_T_mass      = self.assStandardHistogram("T_mass")
+      self.hist_Zp_mass     = self.assStandardHistogram("Zp_mass")
+
+    
+
   
   def analyze(self):
       # retrieving objects
@@ -75,6 +81,15 @@ class TTbarAnalysis(Analysis.Analysis):
 
       # apply a cut on the transverse mass of the W boson decaying to leptons
       if not (AH.WTransverseMass(leadlepton, etmiss) > 30.0): return False
+        
+        
+      #cuts for W, T and Z masses  
+        
+      for i in goodJets
+          for j in goodJets
+              for k in goodJets
+                  for l in goodJets
+                
 
       # Histograms detailing event information
       self.hist_vxp_z.Fill(eventinfo.primaryVertexPosition(), weight)
@@ -108,5 +123,11 @@ class TTbarAnalysis(Analysis.Analysis):
       [self.hist_jetmv1.Fill(jet.mv1(), weight) for jet in goodJets]
       return True
 
+      # histograms for W, t and Z masses
+      [self.hist_W_mass.Fill(Wmass, weight) for jet in goodJets]
+      [self.hist_T_mass.Fill(Tmass, weight) for jet in goodJets]
+      [self.hist_Z_mass.Fill(Zmass, weight) for jet in goodJets]    
+    
+    
   def finalize(self):
       pass

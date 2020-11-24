@@ -84,13 +84,60 @@ class TTbarAnalysis(Analysis.Analysis):
         
         
       #cuts for W, T and Z masses  
+    
+        sum_pt = 0
+        Wmass  = 0
+        Tmass  = 0
+        Zmass  = 0
         
       for i in goodJets
           for j in goodJets
               for k in goodJets
                   for l in goodJets
                 
+                    jet1 = ROOT.TLorentzVector()
+                    jet2 = ROOT.TLorentzVector()
+                    jet3 = ROOT.TLorentzVector()
+                    jet4 = ROOT.TLorentzVector()
+                    
+                    jet1.SetPtEtaPhiM(jet.pt(),jet.eta(),jet.phi(),jet.M())
+                    jet2.SetPtEtaPhiM(jet.pt(),jet.eta(),jet.phi(),jet.M())
+                    jet3.SetPtEtaPhiM(jet.pt(),jet.eta(),jet.phi(),jet.M())
+                    jet4.SetPtEtaPhiM(jet.pt(),jet.eta(),jet.phi(),jet.M())
+                    
+                    
+                    if (jet1 + jet2 + jet3).Pt()/1000 > sum_pt:
+                        sum_pt = (jet1 + jet2 + jet3).Pt()/1000 
+                        Wmass = (jet1 + jet2 + jet3).M()/1000 
+                        
+                        jet12 = (jet1 + jet2).Pt()/1000
+                        jet23 = (jet2 + jet3).Pt()/1000
+                        jet13 = (jet1 + jet3).Pt()/1000
+                        
+                        if jet12 > jet23 & jet12 > jet23:
+                            j1, j2, j3 = jet12, jet23, jet13
+                        if jet23 > jet12 & jet23 > jet13:
+                            j1, j2, j3 = jet23, jet13, jet12
+                        if jet13 > jet23 & jet13 > jet12:
+                            j1, j2, j3 = jet23, jet13, jet12
+                        
 
+      Jet1 = ROOT.TLorentzVector()
+      Jet2 = ROOT.TLorentzVector()
+      Jet3 = ROOT.TLorentzVector()
+      Jet4 = ROOT.TLorentzVector()
+                    
+      Jet1.SetPtEtaPhiM(j1.pt(),j1.eta(),j1.phi(),j1.M())
+      Jet2.SetPtEtaPhiM(j2.pt(),j2.eta(),j2.phi(),j2.M())
+      Jet3.SetPtEtaPhiM(j3.pt(),j3.eta(),j3.phi(),j3.M())
+      Jet4.SetPtEtaPhiM(jet4.pt(),jet4.eta(),jet4.phi(),jet4.M())
+        
+      Tmass = (Jet1 + Jet2).Pt()/1000  
+      
+      Zmass = (Jet1.Pt + Jet2.Pt + Jet3.Pt + Jet4.Pt + etmiss.et + leadlepton.Pt)/1000  
+        
+        
+    
       # Histograms detailing event information
       self.hist_vxp_z.Fill(eventinfo.primaryVertexPosition(), weight)
       self.hist_pvxp_n.Fill(eventinfo.numberOfVertices(), weight)

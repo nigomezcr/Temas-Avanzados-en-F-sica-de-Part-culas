@@ -21,11 +21,11 @@ TH1F *h_zjets;
 TH1F *h_singletop;
 TH1F *h_ttbar;
 
-std::string histname = "hist_three_jets";
+std::string histname = "hist_two_jets";
 float lumi = 1000.;
 //int rebin = 20; //20 - ZmInv //4 - wmt //1 - event selection
 bool logy = true;
-std::string signalmass = "3000";
+std::string signalmass = "2000";
 
 void HistPlotter(){
 
@@ -105,7 +105,7 @@ void HistPlotter(){
   h_stack->Draw("hist");
   h_err->Draw("e2same");
   h_data->Draw("epsame");
-  //  h_signal->Draw("histsame");
+//  h_signal->Draw("histsame");
    h_stack->SetMaximum(20*h_stack->GetMaximum());
   if (logy && histname.find("event_selection") != std::string::npos) h_stack->SetMinimum(10000);
   //else if(logy) h_stack->SetMinimum(0.5);
@@ -267,7 +267,7 @@ void makeGroupHist(){
     TH1F *h = (TH1F*) f->Get(histname.c_str());    
     //h->Rebin(rebin);
     h->Scale(it->second*lumi);
-    h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
+    //h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
     if(i==0) h_zjets = (TH1F*) h->Clone();
     else h_zjets->Add(h);
     i++;
@@ -279,7 +279,7 @@ void makeGroupHist(){
     TH1F *h = (TH1F*) f->Get(histname.c_str());    
     //h->Rebin(rebin);
     h->Scale(it->second*lumi);
-    h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
+    //h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
     if(i==0) h_singletop = (TH1F*) h->Clone();
     else h_singletop->Add(h);
     i++;

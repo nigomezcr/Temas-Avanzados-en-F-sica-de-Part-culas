@@ -193,7 +193,7 @@ Bool_t TopAnalysis::Process(Long64_t entry)
 		if(goodjet_n >= 4)
 		  {
 		    //At least two b-tagged jets
-		    if(goodbjet_n >= 1)
+		    if(goodbjet_n >= 2)
 		      {
 
 			if(Lepton1_MeT_MT > 30000.)

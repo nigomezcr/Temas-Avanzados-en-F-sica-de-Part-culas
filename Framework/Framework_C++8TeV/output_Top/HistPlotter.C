@@ -21,11 +21,11 @@ TH1F *h_zjets;
 TH1F *h_singletop;
 TH1F *h_ttbar;
 
-std::string histname = "hist_two_jets";
+std::string histname = "hist_mt";
 float lumi = 1000.;
-//int rebin = 20; //20 - ZmInv //4 - wmt //1 - event selection
+int rebin = 4; //20 - ZmInv //4 - wmt //1 - event selection
 bool logy = true;
-std::string signalmass = "2000";
+std::string signalmass = "3000";
 
 void HistPlotter(){
 
@@ -66,7 +66,7 @@ void HistPlotter(){
 
   TFile *f_sig = TFile::Open(("ZPrime" + signalmass + ".root").c_str());
   TH1F* h_signal = (TH1F*) f_sig->Get(histname.c_str());
-  //h_signal->Rebin(rebin);
+  h_signal->Rebin(rebin);
   //Rescale signal
   h_signal->Scale(1e3*lumi*signalmap[("ZPrime" + signalmass).c_str()]);
   h_signal->SetLineStyle(7);
@@ -105,7 +105,7 @@ void HistPlotter(){
   h_stack->Draw("hist");
   h_err->Draw("e2same");
   h_data->Draw("epsame");
-//  h_signal->Draw("histsame");
+  h_signal->Draw("histsame");
    h_stack->SetMaximum(20*h_stack->GetMaximum());
   if (logy && histname.find("event_selection") != std::string::npos) h_stack->SetMinimum(10000);
   //else if(logy) h_stack->SetMinimum(0.5);
@@ -119,6 +119,14 @@ void HistPlotter(){
   else if(histname.find("lep_pt") != std::string::npos)h_stack->GetXaxis()->SetRangeUser(0, 1575);
 
 
+  
+
+  std::ostringstream D;
+  D << setprecision(5) << h_data -> Integral(0, h_data -> GetNbinsX()+1);
+  std::string Data = D.str();
+  cout << Data << " " << endl;
+  
+    
   std::ostringstream Entries_ttbar;
   Entries_ttbar << setprecision(5) << h_ttbar -> Integral(0, h_ttbar -> GetNbinsX()+1);
   std::string sEntries_ttbar = Entries_ttbar.str();
@@ -150,11 +158,11 @@ void HistPlotter(){
   std::string D_Boson = db.str();
   cout << D_Boson << " " << endl;
 
-
-  std::ostringstream D;
-  D << setprecision(5) << h_data -> Integral(0, h_data -> GetNbinsX()+1);
-  std::string Data = D.str();
-  cout << Data << " " << endl;
+  
+  std::ostringstream Sig;
+  Sig << setprecision(5) << h_signal -> Integral(0, h_signal -> GetNbinsX()+1);
+  std::string Signal = Sig.str();
+  cout << Signal << " " << endl;
 
     
 

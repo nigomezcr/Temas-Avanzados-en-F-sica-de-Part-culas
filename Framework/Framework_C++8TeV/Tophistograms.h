@@ -21,9 +21,9 @@ void TopAnalysis::define_histograms()
   hist_leadjet_jvf      = new TH1F("hist_jet_jvf",     "Jet Vertex Fraction; JVF ; Jets", 20, 0, 1);
   hist_leadjet_eta      = new TH1F("hist_jet_eta",     "Jet Pseudorapidity; #eta^{jet}; Jets", 30, -3, 3);
   hist_leadjet_MV1      = new TH1F("hist_jet_MV1",     "Jet MV1; MV1 weight ; Jets", 20, 0, 1);
-  hist_three_jets       = new TH1F("hist_three_jets",  "Three jets with higher pT sum; pT; Events", 50, 0, 400);
-  hist_two_jets         = new TH1F("hist_two_jets",  "Two jets with higher pT; pT; Events", 50, 0, 400);
-  hist_Zprime_mass      = new TH1F("hist_Zprime_mass",  "Z' reconstructed mass; pT; Events", 50, 0, 400);
+  hist_three_jets       = new TH1F("hist_three_jets",  "Mass of the W; M [MeV]; Events", 50, 0, 400);
+  hist_two_jets         = new TH1F("hist_two_jets",  "Mass of the top; M [MeV]; Events", 50, 0, 400);
+  hist_Zprime_mass      = new TH1F("hist_Zprime_mass",  "Z' reconstructed mass; M [MeV]; Events", 50, 0, 400);
 
 
   // Leading Lepton histograms
@@ -62,10 +62,10 @@ void TopAnalysis::FillOutputList()
   GetOutputList()->Add(hist_leadlepz0);
   GetOutputList()->Add(hist_leadlepd0);
   // Add Jet variables histograms
+  GetOutputList()->Add(hist_leadjet_jvf);
   GetOutputList()->Add(hist_n_jets);
   GetOutputList()->Add(hist_leadjet_pt);
   GetOutputList()->Add(hist_leadjet_m);
-  GetOutputList()->Add(hist_leadjet_jvf);
   GetOutputList()->Add(hist_leadjet_eta);
   GetOutputList()->Add(hist_leadjet_MV1);
   GetOutputList()->Add(hist_three_jets);

@@ -21,11 +21,11 @@ TH1F *h_zjets;
 TH1F *h_singletop;
 TH1F *h_ttbar;
 
-std::string histname = "hist_leadjet_jvf";
+std::string histname = "hist_three_jets";
 float lumi = 1000.;
 //int rebin = 20; //20 - ZmInv //4 - wmt //1 - event selection
 bool logy = true;
-std::string signalmass = "2000";
+std::string signalmass = "3000";
 
 void HistPlotter(){
 
@@ -156,6 +156,7 @@ void HistPlotter(){
   std::string Data = D.str();
   cout << Data << " " << endl;
 
+    
 
   TLegend *leg = new TLegend(0.55, 0.55, 0.75, 0.9);
   leg->SetBorderSize(0);
@@ -167,7 +168,7 @@ void HistPlotter(){
   leg->SetFillColor(0);
   leg->SetFillStyle(1001);
   leg->SetHeader("     #sqrt{s} = 8 TeV, 1 fb^{-1}");
-  leg->AddEntry(h_data,("Data"+Data).c_str(),"p");
+  leg->AddEntry(h_data,("Data:"+Data).c_str(),"p");
   leg->AddEntry(h_ttbar,("t#bar{t}:"+sEntries_ttbar).c_str(),"f");
   leg->AddEntry(h_singletop,("Single top:"+single_Top).c_str(),"f");
   leg->AddEntry(h_zjets,("Z:"+Z_jets).c_str(),"f");
@@ -175,7 +176,7 @@ void HistPlotter(){
   leg->AddEntry(h_drellyan,("Drell-Yan:"+Drell_Yan).c_str(),"f");
   leg->AddEntry(h_db,("Diboson:"+D_Boson).c_str(),"f");
   leg->AddEntry(h_err,"MC stat. uncertainty","f");
-  // leg->AddEntry(h_signal,("Z'(" + signalmass + " GeV)#rightarrow t#bar{t} x 10^{3}").c_str(),"l");
+  leg->AddEntry(h_signal,("Z'(" + signalmass + " GeV)#rightarrow t#bar{t} x 10^{3}").c_str(),"l");
   leg->Draw();
 
   std::string outfile = histname.substr(0, std::string::npos);
@@ -266,7 +267,7 @@ void makeGroupHist(){
     TH1F *h = (TH1F*) f->Get(histname.c_str());    
     //h->Rebin(rebin);
     h->Scale(it->second*lumi);
-    //h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
+    h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
     if(i==0) h_zjets = (TH1F*) h->Clone();
     else h_zjets->Add(h);
     i++;
@@ -278,7 +279,7 @@ void makeGroupHist(){
     TH1F *h = (TH1F*) f->Get(histname.c_str());    
     //h->Rebin(rebin);
     h->Scale(it->second*lumi);
-    //h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
+    h->Scale(it->second*lumi/h->Integral(0, h->GetNbinsX()+1));
     if(i==0) h_singletop = (TH1F*) h->Clone();
     else h_singletop->Add(h);
     i++;

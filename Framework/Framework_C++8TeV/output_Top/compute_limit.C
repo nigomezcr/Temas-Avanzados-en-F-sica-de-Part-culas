@@ -25,11 +25,11 @@ int compute_limit ()
 
   //These are the number of expected and background events
   //number of signal events after WmT >30 GeV cut
-  double sig[11] = {0,0,0,0,0,0,0,0,0,0,0};
+  double sig[11] = {2454.6,3256.8,4705.1,5397.8,5370.2,4678.9,4179,3725.9,3415.4,3154,2935.4};
   // SM MC events after WmT > 30 GeV
-  double bkg[11] = {0,0,0,0,0,0,0,0,0,0,0};
+  double bkg[11] = {9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601,9511.25601};
   // Number of observed events
-  double obs[11] = {0,0,0,0,0,0,0,0,0,0,0};
+  double obs[11] = {8519,8519,8519,8519,8519,8519,8519,8519,8519,8519,8519};
 
 
   //Signal cross sections
@@ -141,16 +141,16 @@ int compute_limit ()
   //observed limit
   TGraph *my_lim_obs = new TGraph(11, mass, obs_xsec_limit);
   //theory cross ection
-  //  TGraph *theory_xsec = new TGraph(11, mass, xsec);  
+    TGraph *theory_xsec = new TGraph(11, mass, xsec);  
   limit_plot->Add(my_lim);
   my_lim->SetLineStyle(7);
   my_lim->SetLineWidth(2);
   my_lim->SetLineColor(kBlue);
   limit_plot->Add(my_lim_obs);
   my_lim_obs->SetLineWidth(2);
-  //limit_plot->Add(theory_xsec);
-  //theory_xsec->SetLineWidth(2);
-  //theory_xsec->SetLineColor(kRed);
+  limit_plot->Add(theory_xsec);
+  theory_xsec->SetLineWidth(2);
+  theory_xsec->SetLineColor(kRed);
   
   limit_plot->Draw("AL");
 
@@ -167,7 +167,7 @@ int compute_limit ()
   leg->SetHeader("     #sqrt{s} = 8 TeV, 1 fb^{-1}");
   leg->AddEntry(my_lim_obs,"Observed","l");
   leg->AddEntry(my_lim,"Expected","l");
-  //leg->AddEntry(theory_xsec,"Theory #sigma(Z'#rightarrowt#bar{t})","l");
+  leg->AddEntry(theory_xsec,"Theory #sigma(Z'#rightarrowt#bar{t})","l");
   leg->Draw();
 
   can->SaveAs("XsecLimit.pdf");

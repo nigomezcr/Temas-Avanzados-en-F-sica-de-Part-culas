@@ -193,7 +193,7 @@ Bool_t TopAnalysis::Process(Long64_t entry)
 		if(goodjet_n >= 4)
 		  {
 		    //At least two b-tagged jets
-		    if(goodbjet_n >= 2)
+		    if(goodbjet_n >= 1)
 		      {
 
 			if(Lepton1_MeT_MT > 30000.)
@@ -225,12 +225,12 @@ Bool_t TopAnalysis::Process(Long64_t entry)
                             jet3.SetPtEtaPhiE(jet_pt[goodjet_index[k]], jet_eta[goodjet_index[k]], jet_phi[goodjet_index[k]], jet_E[goodjet_index[k]]);
 
                             TLorentzVector jet4 = TLorentzVector();
-                            jet4.SetPtEtaPhiE(jet_pt[goodjet_index[l]], jet_eta[goodjet_index[l]], jet_phi[goodjet_index[l]], jet_E[goodjet_index[k]]);
+                            jet4.SetPtEtaPhiE(jet_pt[goodjet_index[l]], jet_eta[goodjet_index[l]], jet_phi[goodjet_index[l]], jet_E[goodjet_index[l]]);
 
 
                             if ( (jet1.Pt() + jet2.Pt() + jet3.Pt() ) /1000 > sum_pt ){
                                 sum_pt = (jet1.Pt() + jet2.Pt() + jet3.Pt() ) /1000;
-                                max_m = (jet1.M() + jet2.M() + jet3.Pt() )/1000;
+                                max_m = (jet1.M() + jet2.M() + jet3.M() )/1000;
 
                                 j1 = i, j2 = j, j3 = k, j4=l;
 
@@ -260,9 +260,9 @@ Bool_t TopAnalysis::Process(Long64_t entry)
                 TLorentzVector jet_4 = TLorentzVector();
                 jet_4.SetPtEtaPhiE(jet_pt[goodjet_index[j4]], jet_eta[goodjet_index[j4]], jet_phi[goodjet_index[j4]], jet_E[goodjet_index[j4]]);
 
-                double mass2_max = (jet_1 + jet_2 ).M()/1000;
+                double mass2_max = (jet_1 + jet_2 ).M()/1000;        
 
-                double Zmass = (mass2_max + jet_3.M() + jet_4.M() + Lepton1_MeT_MT)/1000;
+                double Zmass = (jet_1 + jet_2 + jet_3 + jet_4 + Lepton_1 + MeT).M()/1000;
 
 
                 hist_three_jets -> Fill(sum_pt,weight);

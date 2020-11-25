@@ -7,7 +7,7 @@ void main_Top(int proof)
 {
   // path to your local directory *or* URL, please change the default one!
   /* Local path example */
-  TString path = "http://opendata.atlas.cern/extendedanalysis/datasets.php"; //"/home/atlas-open-data/8tev/";
+  TString path = "/home/atlas-open-data/8tev/";
 
 
   TChain* chain_WW = new TChain("mini");

@@ -68,7 +68,7 @@ void HistPlotter(){
   TH1F* h_signal = (TH1F*) f_sig->Get(histname.c_str());
   h_signal->Rebin(rebin);
   //Rescale signal
-  h_signal->Scale(1e3*lumi*signalmap[("ZPrime" + signalmass).c_str()]);
+  h_signal->Scale(1e4*lumi*signalmap[("ZPrime" + signalmass).c_str()]);
   h_signal->SetLineStyle(7);
   h_signal->SetLineWidth(3);
   h_signal->SetLineColor(kPink-8);
@@ -190,7 +190,7 @@ void HistPlotter(){
   std::string outfile = histname.substr(0, std::string::npos);
   //if(logy) can->SaveAs((outfile+"_log.pdf").c_str());
   //else can->SaveAs((outfile+".pdf").c_str());
-    can->SaveAs((outfile+".pdf").c_str());
+   // can->SaveAs((outfile+".pdf").c_str());
 }
 
 void groupSamples(){
